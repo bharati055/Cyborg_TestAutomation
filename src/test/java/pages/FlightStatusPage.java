@@ -1,64 +1,124 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import CommonUtils.Wait;
 import baseUtils.BasePage;
 import baseUtils.BrowserFactory;
+import baseUtils.Log;
+import elementRepository.ElementFactory;
 
 public class FlightStatusPage extends BasePage{
 	
-	static final String _flightStatusPage_URL = "https://www.eurowings.com/en/information/at-the-airport/flight-status.html";
-	static final String _flightStatusPage_title = "Flight status - Information - Eurowings";
-	
 	BrowserFactory factory  = new BrowserFactory();
-	
-	@FindBy(xpath="//span[text()='Departure airport']")
-	WebElement txt_departure_initial;
-	
-	@FindBy(xpath="//span[text()='Departure airport']//span[text()='Destination airport']")
-	WebElement txt_destination_initial;
-	
-	@FindBy(xpath="//input[@name='datepicker_input_27']")
-	WebElement btn_datePicker;
-	
-	@FindBy(xpath="//span[text()='Show flight status']")
-	WebElement btn_submit;
+	WebDriver driver = factory.getDriver();
+
+	//Page object method for - btn_departure_initial
+	   public WebElement btn_departure_initial(){
+	     Log.info("Element Page Object >> btn_departure_initial");
+	     return ElementFactory.getElement("btn_departure_initial");
+	   }
+
+	   //Page object method for - txt_departure
+	   public WebElement txt_departure(){
+	     Log.info("Element Page Object >> txt_departure");
+	     return ElementFactory.getElement("txt_departure");
+	   }
+
+	   //Page object method for - btn_destination_initial
+	   public WebElement btn_destination_initial(){
+	     Log.info("Element Page Object >> btn_destination_initial");
+	     return ElementFactory.getElement("btn_destination_initial");
+	   }
+
+	   //Page object method for - txt_departure
+	   public WebElement txt_destination(){
+	     Log.info("Element Page Object >> txt_destination");
+	     return ElementFactory.getElement("txt_destination");
+	   }
+
+	   //Page object method for - btn_datePicker
+	   public WebElement btn_datePicker(){
+	     Log.info("Element Page Object >> btn_datePicker");
+	     return ElementFactory.getElement("btn_datePicker");
+	   }
+
+	   //Page object method for - btn_submit
+	   public WebElement btn_submit(){
+	     Log.info("Element Page Object >> btn_submit");
+	     return ElementFactory.getElement("btn_submit");
+	   }
+	   
+	   public WebElement btn_selection() {
+		   Log.info("Element Page Object >> btn_selection");
+		   return ElementFactory.getElement("btn_selection");
+	   }
+	   
+	   public WebElement btn_activeSearchResultDate() {
+		   Log.info("Element Page Object >> btn_activeSearchResultDate");
+		   return ElementFactory.getElement("btn_activeSearchResultDate");
+	   }
+	   
+	//POM auto-generate complete =========================================================  
 	
 	public WebElement getDateElement(String date) {
 		// date = "2021-07-28";
 		String dateXpath = "//input[@value='"+date+"']";
-		return getDriver().findElement(By.xpath(dateXpath));
+		return driver.findElement(By.xpath(dateXpath));
 	}
 	
-	public boolean launch() {
-		factory.getDriver(_flightStatusPage_URL);
-		String actualTitle = factory.getDriver().getTitle();
-		if(actualTitle==_flightStatusPage_title) {
-			System.out.println("Successfully launched URL");
-			return true;
-		}else {
-			System.out.println("Failed to launch url - "+_flightStatusPage_URL);
-			return false;
-		}
-	}
+//	public WebElement getSelectiontoClick() {
+//		String xpath = "//div[@class='o-station-select__station-list__text']/span[contains(text(),'United')]";
+//		return driver.findElement(By.xpath(xpath));
+//	}
+
 	
+	
+
 	public void setDeparture(String departure) {
-		txt_departure_initial.sendKeys(departure);
+//		factory.getDriver().navigate().refresh();
+		Log.info("Inside >> FlightStatusPage >> setDeparture: Setting departure field.");
+		this.btn_departure_initial().click();
+		this.txt_departure().sendKeys(departure);
+		this.btn_selection().click();
+		Wait.wait(1000);
+
 	}
 	
 	public void setDestination(String destination) {
-		txt_destination_initial.sendKeys(destination);	
+		Log.info("Inside >> FlightStatusPage >> setDestination: Setting destination field.");
+		this.btn_destination_initial().click();
+		
+		this.txt_destination().sendKeys(destination);
+		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.btn_selection()))
+        .click();
+
+		Wait.wait(1000);
 	}
 	
 	public void setDate(String date) {
-		btn_datePicker.click();
+		Log.info("Inside >> FlightStatusPage >> setDate: Setting date field.");
+		//btn_datePicker.click();
+		this.btn_datePicker().click();
 		this.getDateElement(date).click();
 	}
 	
 	public void clickSubmit() {
-		btn_submit.click();
+		Log.info("Inside >> FlightStatusPage >> clickSubmit: Clicking Submit button.");
+		this.btn_submit().click();
+	}
+	
+	public String get_activeSearchResultDate() {
+		String date = btn_activeSearchResultDate().findElement(By.tagName("div")).getText();
+		System.out.println("Tag name >> " +date);
+		return date;
 	}
 
 }

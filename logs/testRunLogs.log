@@ -1,0 +1,15 @@
+[INFO ] 2021-07-29 13:07:38.732 [main] Log - Inside stepFile - ShowFlightStatus >> User has launched eurowings.com flight status page
+[INFO ] 2021-07-29 13:07:38.745 [main] Log - In BrowserFactory >> getDriver and navigate with URL - https://www.eurowings.com/en/information/at-the-airport/flight-status.html
+[INFO ] 2021-07-29 13:07:38.745 [main] Log - In BrowserFactory >> getDriver 
+[INFO ] 2021-07-29 13:07:38.746 [main] Log - IDriver >>==================================>> null
+[INFO ] 2021-07-29 13:07:38.746 [main] Log - Driver exist >> false
+[INFO ] 2021-07-29 13:07:48.074 [main] Log - 1st   === IDriver >>==================================>> ChromeDriver: chrome on WINDOWS (f5735d088c64220e38e21f257370ac0c)
+[INFO ] 2021-07-29 13:07:48.074 [main] Log - Driver not found. Creating Driver...........
+[INFO ] 2021-07-29 13:07:57.879 [main] Log - In BrowserFactory >> getDriver 
+[INFO ] 2021-07-29 13:07:57.880 [main] Log - IDriver >>==================================>> ChromeDriver: chrome on WINDOWS (f5735d088c64220e38e21f257370ac0c)
+[INFO ] 2021-07-29 13:07:57.880 [main] Log - Driver exist >> true
+[INFO ] 2021-07-29 13:07:58.681 [main] Log - In BrowserFactory >> getDriver 
+[INFO ] 2021-07-29 13:07:58.682 [main] Log - IDriver >>==================================>> ChromeDriver: chrome on WINDOWS (f5735d088c64220e38e21f257370ac0c)
+[INFO ] 2021-07-29 13:07:58.683 [main] Log - Driver exist >> true
+[INFO ] 2021-07-29 13:07:59.140 [main] Log - Inside stepFile - ShowFlightStatus >> user_enters_name1_in_departure_field. Departure = Cologne-Bonn
+[INFO ] 2021-07-29 13:07:59.142 [main] Log - Inside >> FlightStatusPage >> setDeparture: Setting departure field.

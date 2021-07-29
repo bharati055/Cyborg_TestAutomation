@@ -15,7 +15,7 @@ public class BrowserFactory {
 	// }
 
 	public WebDriver getDriver(String url) {
-		System.out.println("In BrowserFactory >> getDriver and navigate with URL - " + url);
+		Log.info("In BrowserFactory >> getDriver and navigate with URL - " + url);
 		driver = this.getDriver();
 		driver.get(url);
 		driver.manage().window().maximize();
@@ -23,12 +23,12 @@ public class BrowserFactory {
 	}
 
 	public WebDriver getDriver() {
-		System.out.println("In BrowserFactory >> getDriver ");
-		System.out.println("IDriver >>==================================>> " + drivers.get("driver"));
-		System.out.println("Driver exist >> " + drivers.containsKey("driver"));
+		//Log.info("In BrowserFactory >> getDriver ");
+//		Log.info("IDriver >>==================================>> " + drivers.get("driver"));
+//		Log.info("Driver exist >> " + drivers.containsKey("driver"));
 		if (!drivers.containsKey("driver")) {
 			this.createDriver();
-			System.out.println("Driver not found. Creating Driver...........");
+			Log.info("Driver not found. Creating Driver...........");
 		}
 		return drivers.get("driver");
 	}
@@ -36,20 +36,21 @@ public class BrowserFactory {
 	public void createDriver() {
 		switch (browser) {
 		case "chrome":
-			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 			break;
 		default:
-			System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 			break;
 		}
 
 		drivers.put("driver", driver);
-		System.out.println("1st   === IDriver >>==================================>> " + drivers.get("driver"));
+		Log.info("1st   === IDriver >>==================================>> " + drivers.get("driver"));
 	}
 
 	public void closeDriver() {
+		Log.info("================================= Closing Browser =================================");
 		driver = drivers.get("driver");
 		driver.close();
 		drivers.remove("driver");
