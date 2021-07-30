@@ -9,11 +9,14 @@ Feature: Our website users should be able get the flights status of a given flig
     And User enters <destination> in Destination field
     And User selects <date> in Date field
     When clicks Show flight status button
-    Then user can see the flight status for the route and date selected.
+    Then user can see the flight status for the route and date selected successfully
+    And closes browser
     
      Examples: 
-      | departure    | destination | date       |
-      | Cologne-Bonn | Hamburg     | 28/07 |
+      | departure    | destination | date  |
+      | CGN | BER      | today |
+      #| Cologne-Bonn | Munich      | yesterday |
+      #| Cologne-Bonn | Munich      | tomorrow |
 
   #@P2 @regression
   #Scenario Outline: User enters Departure, Destination and selects past/present/future date to search for flight status
@@ -26,6 +29,6 @@ Feature: Our website users should be able get the flights status of a given flig
 #
     #Examples: 
       #| departure    | destination | date       |
-      #| Cologne-Bonn | Munich      | 2021-07-27 |
+      #| Cologne-Bonn | Hamburg     | 2021-07-27 |
       #| Cologne-Bonn | Munich      | 2021-07-28 |
       #| Cologne-Bonn | Munich      | 2021-07-29 |

@@ -32,5 +32,9 @@ public class BlankPage extends BasePage{
 			return false;
 		}
 	}
+	
+	public void closeBrowser() {
+		factory.closeDriver();
+	}
 
 }

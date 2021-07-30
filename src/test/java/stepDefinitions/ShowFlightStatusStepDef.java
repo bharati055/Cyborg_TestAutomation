@@ -3,6 +3,7 @@ package stepDefinitions;
 
 import static org.junit.Assert.assertTrue;
 
+import CommonUtils.Date;
 import baseUtils.Log;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,7 +12,7 @@ import io.cucumber.java.en.When;
 import pages.BlankPage;
 import pages.FlightStatusPage;
 
-public class ShowFlightStatus {
+public class ShowFlightStatusStepDef {
 
 	FlightStatusPage flightStatusPage;
 	BlankPage blankPage;
@@ -42,8 +43,11 @@ public class ShowFlightStatus {
 	}
 
 	@And("^User selects (.*) in Date field$")
-	public void user_selects_success_in_date_field(String flightDate) {
+	public void user_selects_success_in_date_field(String when) {
+		
+		String flightDate = Date.getDate(when);
 		Log.info("Inside stepFile - ShowFlightStatus >> user_selects_success_in_date_field. flightDate = "+flightDate);
+		
 		flightStatusPage.setDate(flightDate);
 		searchDate = flightDate;
 	}
@@ -55,15 +59,26 @@ public class ShowFlightStatus {
 	   flightStatusPage.clickSubmit();
 	}
 
-	@Then("user can see the flight status for the route and date selected.")
+	@Then("user can see the flight status for the route and date selected successfully")
 	public void user_can_see_the_flight_status_for_the_route_and_date_selected() {
 		Log.info("Inside stepFile - ShowFlightStatus >> user can see the flight status for the route and date selected.");
 		
 		String actualDate = flightStatusPage.get_activeSearchResultDate();
 		//Fri, 28/07/
 		//2021-07-28
-		assertTrue(searchDate.contains(actualDate));
+		String[] splitup=searchDate.split("-");
+		String newSearchString = splitup[2]+"/"+splitup[1];
+		assertTrue(actualDate.contains(newSearchString));
 		
+		//Check result set
+		assertTrue(!flightStatusPage.flightNotFoundMessageExist());
+			
+		
+	}
+	
+	@Then("closes browser")
+	public void closes_browser() {
+		blankPage.closeBrowser();
 	}
 
 	

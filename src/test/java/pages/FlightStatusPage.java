@@ -66,6 +66,11 @@ public class FlightStatusPage extends BasePage{
 		   return ElementFactory.getElement("btn_activeSearchResultDate");
 	   }
 	   
+	   public WebElement obj_searchedFlightStatusList() {
+		   Log.info("Element Page Object >> obj_searchedFlightStatusList");
+		   return ElementFactory.getElement("obj_searchedFlightStatusList");
+	   }
+	   
 	//POM auto-generate complete =========================================================  
 	
 	public WebElement getDateElement(String date) {
@@ -88,25 +93,24 @@ public class FlightStatusPage extends BasePage{
 		this.btn_departure_initial().click();
 		this.txt_departure().sendKeys(departure);
 		this.btn_selection().click();
-		Wait.wait(1000);
 
 	}
 	
 	public void setDestination(String destination) {
 		Log.info("Inside >> FlightStatusPage >> setDestination: Setting destination field.");
 		this.btn_destination_initial().click();
-		
+		Wait.waitTill(3000);
 		this.txt_destination().sendKeys(destination);
 		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.btn_selection()))
         .click();
-
-		Wait.wait(1000);
 	}
 	
 	public void setDate(String date) {
 		Log.info("Inside >> FlightStatusPage >> setDate: Setting date field.");
-		//btn_datePicker.click();
 		this.btn_datePicker().click();
+		Wait.waitTill(1000);
+//		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.getDateElement(date)))
+//        .click();
 		this.getDateElement(date).click();
 	}
 	
@@ -119,6 +123,18 @@ public class FlightStatusPage extends BasePage{
 		String date = btn_activeSearchResultDate().findElement(By.tagName("div")).getText();
 		System.out.println("Tag name >> " +date);
 		return date;
+	}
+	
+	public boolean flightNotFoundMessageExist() {
+		
+		
+		try{
+		driver.findElement(By.xpath("//h2[text()='Unfortunately, we could not find any results for your search.']"));
+		return true;
+		}catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 }

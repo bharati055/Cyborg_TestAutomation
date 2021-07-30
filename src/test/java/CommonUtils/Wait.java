@@ -22,4 +22,13 @@ public class Wait {
 		
 	}
 	
+	public static void waitTill(int miliseconds) {
+		try {
+			Thread.sleep(miliseconds);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

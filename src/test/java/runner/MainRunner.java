@@ -8,7 +8,7 @@ import io.cucumber.junit.Cucumber;
 @CucumberOptions(features = "src/test/resources/Features",
 				glue = {"stepDefinitions"},
 				monochrome = true,      
-				plugin = {"pretty", "html:target/HTMLReport"},      
+				plugin = {"pretty", "html:target/HTMLReport.html"},      
 				tags = "@smoke"     ) 
 public class MainRunner {
 
