@@ -21,6 +21,12 @@ mvn -version
 ```
 mvn test
 ```
+**Run in Eclipse**
+1. Launch Eclipse
+2. Import the project as a Maven project
+3. Right click on the project and click maven >> select update project. This will download all required dependencies.
+4. Right click on the TestRunner file and select Run as JUnit test (EWD_AT_TestProject/src/test/java/runner/TestRunner.java)
+
 **Check run report**
 In the project root directory report is created in the target folder.
 
