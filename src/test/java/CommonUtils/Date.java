@@ -20,6 +20,9 @@ public class Date {
 	    case "tomorrow":
 	    	cal.add(Calendar.DATE, 1);
 	    	return dateFormat.format(cal.getTime());
+	    case "OutOfRange":
+	    	cal.add(Calendar.DATE, 7);
+    		return dateFormat.format(cal.getTime());
 	    }
 		return "";
 	}

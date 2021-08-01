@@ -55,5 +55,11 @@ public class BrowserFactory {
 		driver.close();
 		drivers.remove("driver");
 	}
+	public void quitDriver() {
+		Log.info("================================= Closing Browser =================================");
+		driver = drivers.get("driver");
+		driver.quit();
+		drivers.remove("driver");
+	}
 
 }

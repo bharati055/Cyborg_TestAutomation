@@ -2,33 +2,55 @@
 #Feature Description : Our website users should be able get the flights status of a given flight route by a given date.
 Feature: Our website users should be able get the flights status of a given flight route by a given date
 
-  @P1 @regression @smoke
-  Scenario: User enters Departure, Destination and selects date to search for flight status
+  @P1 @regression @smoke @test
+  Scenario Outline: [TestID-01] User enters Departure, Destination and selects todays date to search for flight status
+    Given User has launched flight status page
+    And User enters city code - <departure> in Departure field
+    And User enters city code - <destination> in Destination field
+    And User selects <date> in Date field
+    When clicks Show flight status button
+    Then user can see the flight status as <ExpectedFlightStatus> for the route and date selected
+    And closes browser
+
+    Examples: 
+      | departure | destination | date  | ExpectedFlightStatus |
+      | CGN       | BER         | today | on time              |
+
+  @P2 @regression
+  Scenario Outline: [TestID-02] User enters Departure, Destination and selects yesterday/tomorrow date to search for flight status
     Given User has launched flight status page
     And User enters <departure> in Departure field
     And User enters <destination> in Destination field
     And User selects <date> in Date field
     When clicks Show flight status button
-    Then user can see the flight status for the route and date selected successfully
+    Then user can see the flight status as <ExpectedFlightStatus> for the route and date selected
     And closes browser
-    
-     Examples: 
-      | departure    | destination | date  |
-      | CGN | BER      | today |
-      #| Cologne-Bonn | Munich      | yesterday |
-      #| Cologne-Bonn | Munich      | tomorrow |
 
-  #@P2 @regression
-  #Scenario Outline: User enters Departure, Destination and selects past/present/future date to search for flight status
-    #Given User has launched flight status page
-    #And User enters <departure> in Departure field
-    #And User enters <destination> in Destination field
-    #And User selects <date> in Date field
-    #When clicks Show flight status button
-    #Then user can see the flight status for the route and date selected.
-#
-    #Examples: 
-      #| departure    | destination | date       |
-      #| Cologne-Bonn | Hamburg     | 2021-07-27 |
-      #| Cologne-Bonn | Munich      | 2021-07-28 |
-      #| Cologne-Bonn | Munich      | 2021-07-29 |
+    Examples: 
+      | departure    | destination        | date     | ExpectedFlightStatus |
+      #| Cologne-Bonn       | Berlin Brandenburg      | yesterday | arrived              |
+      | Cologne-Bonn | Berlin Brandenburg | tomorrow | on time              |
+
+  @P2 @regression
+  Scenario Outline: [TestID-03] User should not be allowed to select date out of allowed range
+    Given User has launched flight status page
+    And tries to select date out of allowed range
+    Then user is not allowed to select that day
+    And closes browser
+
+  @P2 @regression
+  Scenario Outline: [TestID-04] User should not be allowed to enter same city in Departure, Destination
+    Given User has launched flight status page
+    And User enters <departure> in Departure field
+    And User enters <destination> in Destination field
+    Then User is not allowed to select same value in departure and destination
+    And closes browser
+
+    Examples: 
+      | departure    | destination  |
+      | Cologne-Bonn | Cologne-Bonn |
+
+  @P2 @regression @sanity @cleanup
+  Scenario: [Cleanup] Close Browser if open
+    Given the test is over
+    Then quit browser

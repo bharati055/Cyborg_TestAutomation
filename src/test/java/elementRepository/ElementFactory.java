@@ -25,7 +25,7 @@ public class ElementFactory {
 	 * @return
 	 */
 	public static Properties getRepository(){
-		Log.info("Function Execution: ElementFactory>>getRepository");
+		//Log.info("Function Execution: ElementFactory>>getRepository");
 		
 		Properties propObj = null;
 		try {
@@ -55,7 +55,7 @@ public class ElementFactory {
 	 */
 	public static WebElement getElement(String eleName){
 		
-		Log.info("Function Execution: ElementFactory>>getElement");
+		//Log.info("Function Execution: ElementFactory>>getElement");
 		
 		WebDriver driver = factory.getDriver();
 		Properties propObj = ElementFactory.getRepository();
