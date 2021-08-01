@@ -22,5 +22,29 @@ mvn test
 ```
 **Check run report**
 In the project root directory report is created in the target folder:
+
 ![image](https://user-images.githubusercontent.com/20679871/127773669-6292435f-8ef5-415a-861e-a43f0f19e139.png)
+
+**Project structure detail & description**
+
+![image](https://user-images.githubusercontent.com/20679871/127774677-d1a2916a-3613-4887-9bee-ce8053017116.png)
+
+**Packages description:**
+*	baseUtils: Contains mandatory utilities like browser factory.
+*	CommonUtils: Contains all commonly used utilities like date, wait.
+*	elementRepository: Contains all element definitions (locators) and methods to access it.
+*	Pages: Contains page class.
+*	Runner: Contains test runner class file
+*	stepDefenition: Contains supporting step definition functions for feature files.
+
+**Resources description**
+*	Feature: Contains feature files in Cucumber BDD format.
+*	Driver: Contains webDriver for selenium.
+*	testData: Contains test data files for expected result.
+	
+**Others:**
+*	Target: Contains HTML report for test runs
+*	Logs: Contains log files for the run
+
+![image](https://user-images.githubusercontent.com/20679871/127774693-af4b45f5-2c55-46a1-aa05-042e512f5a19.png)
 
