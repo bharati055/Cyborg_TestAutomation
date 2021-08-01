@@ -20,3 +20,7 @@ To run automation use below command:
 ```
 mvn test
 ```
+**Check run report**
+In the project root directory report is created in the target folder:
+![image](https://user-images.githubusercontent.com/20679871/127773669-6292435f-8ef5-415a-861e-a43f0f19e139.png)
+
