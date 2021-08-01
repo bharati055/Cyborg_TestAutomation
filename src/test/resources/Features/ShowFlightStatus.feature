@@ -2,11 +2,11 @@
 #Feature Description : Our website users should be able get the flights status of a given flight route by a given date.
 Feature: Our website users should be able get the flights status of a given flight route by a given date
 
-  @P1 @regression @smoke @test
-  Scenario Outline: [TestID-01] User enters Departure, Destination and selects todays date to search for flight status
+  @P1 @regression @smoke
+  Scenario Outline: [TestID-01] User enters departure, destination city code and selects todays date to search for flight status
     Given User has launched flight status page
-    And User enters city code - <departure> in Departure field
-    And User enters city code - <destination> in Destination field
+    And User enters <departure> in Departure field
+    And User enters <destination> in Destination field
     And User selects <date> in Date field
     When clicks Show flight status button
     Then user can see the flight status as <ExpectedFlightStatus> for the route and date selected
@@ -17,7 +17,7 @@ Feature: Our website users should be able get the flights status of a given flig
       | CGN       | BER         | today | on time              |
 
   @P2 @regression
-  Scenario Outline: [TestID-02] User enters Departure, Destination and selects yesterday/tomorrow date to search for flight status
+  Scenario Outline: [TestID-02] User enters Departure, Destination and selects tomorrows date to search for flight status
     Given User has launched flight status page
     And User enters <departure> in Departure field
     And User enters <destination> in Destination field
@@ -28,9 +28,22 @@ Feature: Our website users should be able get the flights status of a given flig
 
     Examples: 
       | departure    | destination        | date     | ExpectedFlightStatus |
-      #| Cologne-Bonn       | Berlin Brandenburg      | yesterday | arrived              |
       | Cologne-Bonn | Berlin Brandenburg | tomorrow | on time              |
 
+  @P2 @regression
+  Scenario Outline: [TestID-03] User enters Departure, Destination and selects yesterdays date to search for flight status
+    Given User has launched flight status page
+    And User enters <departure> in Departure field
+    And User enters <destination> in Destination field
+    And User selects <date> in Date field
+    When clicks Show flight status button
+    Then user can see the flight status as <ExpectedFlightStatus> for the route and date selected
+    And closes browser
+
+    Examples: 
+      | departure    | destination        | date     | ExpectedFlightStatus |
+      | Cologne-Bonn       | Berlin Brandenburg      | yesterday | arrived              |
+      
   @P2 @regression
   Scenario Outline: [TestID-03] User should not be allowed to select date out of allowed range
     Given User has launched flight status page

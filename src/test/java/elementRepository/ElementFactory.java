@@ -32,7 +32,7 @@ public class ElementFactory {
 			
 			propObj = eleRepo.get("repository");
 			if(propObj==null){
-				repoFile = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\java\\elementRepository\\element.properties");
+				repoFile = new FileInputStream(System.getProperty("user.dir") + "/src/test/java/elementRepository/element.properties");
 				propObj = new Properties();
 				propObj.load(repoFile);
 				//Log.info("Function Execution: ElementFactory>>getRepository>> Repository is catched.");

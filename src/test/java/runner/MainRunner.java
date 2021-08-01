@@ -9,7 +9,7 @@ import io.cucumber.junit.Cucumber;
 				glue = {"stepDefinitions"},
 				monochrome = true,      
 				plugin = {"pretty", "html:target/HTMLReport.html"},      
-				tags = "@test"     ) 
+				tags = "@regression"     ) 
 public class MainRunner {
 
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import CommonUtils.FlightCodeMapping;
 import CommonUtils.Wait;
 import baseUtils.BasePage;
 import baseUtils.BrowserFactory;
@@ -19,6 +20,7 @@ public class FlightStatusPage extends BasePage{
 	
 	BrowserFactory factory  = new BrowserFactory();
 	WebDriver driver = factory.getDriver();
+	FlightCodeMapping flightCodeMap = new FlightCodeMapping();
 
 	 //Page object method for - btn_departure_initial
 	   public WebElement btn_departure_initial(){
@@ -98,25 +100,20 @@ public class FlightStatusPage extends BasePage{
 		// date = "2021-07-28";
 		String dateXpath = "//input[@value='"+date+"']";
 		return driver.findElement(By.xpath(dateXpath));
-	}
-	
-//	public WebElement getSelectiontoClick() {
-//		String xpath = "//div[@class='o-station-select__station-list__text']/span[contains(text(),'United')]";
-//		return driver.findElement(By.xpath(xpath));
-//	}
-
-	
-	
+	}	
 
 	public boolean setDeparture(String departure) {
-//		factory.getDriver().navigate().refresh();
 		Log.info("Inside >> FlightStatusPage >> setDeparture: Setting departure field.");
-		this.btn_departure_initial().click();
-		this.txt_departure().sendKeys(departure);
-		this.btn_selection().click();
+		//get full city name if Code was provided
+		String cityFullName=flightCodeMap.getNameByCode(departure);
 		
-		//Validate the field is set
-		if(driver.findElement(By.xpath("//span[text()='"+departure+"']")).isDisplayed())
+		this.btn_departure_initial().click();
+		this.txt_departure().sendKeys(cityFullName);
+
+		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.btn_selection()))
+        .click();
+		//Validate the field is set properly
+		if(driver.findElement(By.xpath("//span[text()='"+cityFullName+"']")).isDisplayed())
 			return true;
 		else
 			return false;
@@ -125,17 +122,32 @@ public class FlightStatusPage extends BasePage{
 	
 	public boolean setDestination(String destination) {
 		Log.info("Inside >> FlightStatusPage >> setDestination: Setting destination field.");
+		//get full city name if Code was provided
+		String cityFullName=flightCodeMap.getNameByCode(destination);
+				
 		this.btn_destination_initial().click();
 		Wait.waitTill(3000);
-		this.txt_destination().sendKeys(destination);
+		this.txt_destination().sendKeys(cityFullName);
+		
 		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(this.btn_selection()))
         .click();
-		
-		//Validate the field is set
-		if(driver.findElement(By.xpath("//span[text()='"+destination+"']")).isDisplayed())
+		//Validate the field is set properly
+		if(driver.findElement(By.xpath("//span[text()='"+cityFullName+"']")).isDisplayed())
 			return true;
 		else
 			return false;
+		
+//		String xpath = "//ul[@class='o-station-select__station-list']//span[text()='"+cityFullName+"']";
+//		WebElement ele_SelectedCIty = driver.findElement(By.xpath(xpath));
+//
+//		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(ele_SelectedCIty))
+//        .click();
+//		
+//		//Validate the field is set properly
+//		if(ele_SelectedCIty.isDisplayed())
+//			return true;
+//		else
+//			return false;
 			
 	}
 	
