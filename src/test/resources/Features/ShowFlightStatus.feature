@@ -45,14 +45,14 @@ Feature: Our website users should be able get the flights status of a given flig
       | Cologne-Bonn       | Berlin Brandenburg      | yesterday | arrived              |
       
   @P2 @regression
-  Scenario Outline: [TestID-03] User should not be allowed to select date out of allowed range
+  Scenario Outline: [TestID-04] User should not be allowed to select date out of allowed range
     Given User has launched flight status page
     And tries to select date out of allowed range
     Then user is not allowed to select that day
     And closes browser
 
   @P2 @regression
-  Scenario Outline: [TestID-04] User should not be allowed to enter same city in Departure, Destination
+  Scenario Outline: [TestID-05] User should not be allowed to enter same city in Departure, Destination
     Given User has launched flight status page
     And User enters <departure> in Departure field
     And User enters <destination> in Destination field
