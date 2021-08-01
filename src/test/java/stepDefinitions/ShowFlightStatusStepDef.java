@@ -79,7 +79,6 @@ public class ShowFlightStatusStepDef {
 		
 		String flightDate = Date.getDate(when);
 		Log.info("Inside stepFile - ShowFlightStatus >> user_selects_success_in_date_field. flightDate = "+flightDate);
-		
 		flightStatusPage.setDate(flightDate);
 		searchDate = flightDate;
 	}
