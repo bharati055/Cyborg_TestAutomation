@@ -46,5 +46,4 @@ In the project root directory report is created in the target folder.
 *	Target: Contains HTML report for test runs
 *	Logs: Contains log files for the run
 
-![image](https://user-images.githubusercontent.com/20679871/127774693-af4b45f5-2c55-46a1-aa05-042e512f5a19.png)
 
