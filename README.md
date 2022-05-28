@@ -1,4 +1,4 @@
-# EWD_AT_TestProject
+# Cyborg_TestAutomation
 
 Automation framework components:
 1. Selenium: Perform elment recognition and action using Selenium APIs.
